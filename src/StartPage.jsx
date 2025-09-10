@@ -311,20 +311,16 @@ export default function App() {
               }
             }
           }, 50);
-          timers.push(typingInterval); // Track the interval timer for cleanup
+          timers.push(typingInterval);
         } else {
-          // For static lines, just add the text.
           setBootSequence((prev) => [...prev, line.text]);
         }
       }, delay);
-      timers.push(lineTimer); // Track the line timer for cleanup
+      timers.push(lineTimer);
     });
 
-    // Cleanup function: This is the critical part.
-    // It runs when the component unmounts. In Strict Mode, this happens after the first run.
     return () => {
-      // Clear all timers created during this effect run.
-      timers.forEach(clearTimeout); // clearTimeout also works for setInterval
+      timers.forEach(clearTimeout);
     };
   }, []);
 
